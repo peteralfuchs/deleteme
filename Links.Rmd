@@ -1,0 +1,8 @@
+---
+title: "Modersiden"
+output: html_document
+---
+
+### Fork linket
+
+fork the repo for this website and follow instructions on read me to get set up. [https://github.com/CrumpLab/LabJournalWebsite](https://github.com/CrumpLab/LabJournalWebsite)
