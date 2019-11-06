@@ -1,7 +1,8 @@
 ---
-title: "Links"
+title: "Modersiden"
 output: html_document
 ---
-## Links
 
-![](https://i.imgflip.com/1j9mml.jpg)
+### Fork linket
+
+fork the repo for this website and follow instructions on read me to get set up. [https://github.com/CrumpLab/LabJournalWebsite](https://github.com/CrumpLab/LabJournalWebsite)

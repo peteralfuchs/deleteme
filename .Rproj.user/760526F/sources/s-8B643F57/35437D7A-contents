@@ -1,5 +1,5 @@
 ---
-title: "Koder"
+title: "Animals"
 output:
   html_document:
     toc: true
@@ -7,368 +7,343 @@ output:
     collapsed: false
     number_sections: false
     toc_depth: 1
-    code_folding: show
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
-# Startkoder
-### Ryd Gobal Enviroment
-```{r eval=FALSE}
+# Opgave 1
+## Boxplot tiden for de forskellige betingelser  
+Ryd global enviorment og hent filen (en god ide, er at sætte dit work directory inden, f.eks. til dit skrivebord eller et andet sted, du ved hvor er. "Session - Set Working Directory - Choose Directory)
+
+```{r}
 rm(list = ls())
+df <- read.csv("animals.csv", sep = ";")
 ```
 
-### Hent filen og serparer med semikolon 
-```{r eval=FALSE}
-df <- read.csv("xxx", sep = ";")
+Fjern irrelevante kolonner:
+```{r}
+df$Participant.ID <- NULL
+df$Køn <- NULL
+df$Timers.søvn <- NULL
+df$Prøvet.før. <- NULL
+df$Andre.noter <- NULL
 ```
 
-### Fjern irrelevante kolonner
-```{r eval=FALSE}
-df$xxx <- NULL
-```
-
-***
-# Eller opret din egen dataframe
-
-### Start med at skriv data ind
-```{r eval=FALSE}
-employee <- c('John Doe',
-              'Peter Gynn',
-              'Jolie Hope')
-salary <- c(21000, 
-            23400, 
-            26800)
-startdate <- as.Date(c('2010-11-1',
-                       '2008-3-25',
-                       '2007-3-14'))
-```
-
-### Så lav dataframe med disse kolonner
-```{r eval=FALSE}
-employ.data <- data.frame(employee, 
-                          salary, 
-                          startdate)
-```
-
-Check data ved at kigge i Global Environment eller ved brug at str()
-```{r eval=FALSE}
-str(employ.data)
-```
-
-***
-# Forbered data
-
-### Load dine pakker
-```{r eval=FALSE}
-#Basispakken:
+Load tidyverse 
+```{r}
 library(tidyverse)
-#Denne pakke gør det muligt, at plotte flere plots i samme billede:
-library(patchwork)
 ```
 
-### Check hvilken kategori dit data har ved at klikke på 'fold ud' i Gobal Environment. 
-Det er vigtigt at kategorierne passer allerede her i processen - hvis de ikke passer, kan en af følgende koder bruges
-```{r eval=FALSE}
-df$xxx <- as.numeric(df$xxx)
-df$xxx <- as.factor(df$xxx)
+Omdøb kolonnerne 
+```{r}
+colnames(df)[1] <- "Reading no int."
+colnames(df)[2] <- "Naming no int."
+colnames(df)[3] <- "Reading w. int."
+colnames(df)[4] <- "Naming w. int."
 ```
 
-Du kan også checke kategorierne ved brug at str()
-```{r eval=FALSE}
-str(df)
-```
-
-### Omdøb kolonner
-```{r eval=FALSE}
-colnames(df)[1] <- "xxxx"
-colnames(df)[2] <- "xxxx"
-colnames(df)[3] <- "xxxx"
-colnames(df)[4] <- "xxxx"
-```
-
-### Sorter kolonner med subset()
-```{r eval=FALSE}
-xxxx <- subset(df, df$xxx == 1)
-```
-
-Et eksempel på en kompliceret sortering
-```{r eval=FALSE}
-child <- subset(train, train$Age < 10)
-young <- subset(train, train$Age >= 10 & train$Age < 20)
-adult <- subset(train, train$Age >= 20 & train$Age < 40)
-elder <- subset(train, train$Age >= 40 & train$Age < 60)
-old <- subset(train, train$Age > 60)
-```
-
-
-### Lav en ny kolonne med "ifelse"
-Lav en ny kolonne, der siger at: "hvis variablen i df$ny siger "Ja", så skriv 1, ellers skriv 0"
-```{r eval=FALSE}
-df$ny <- ifelse(df$xxx, "Ja", 1, 0)
-```
-
-Den kan også se sådan ud:
-```{r eval=FALSE}
-df$ny <- ifelse(df$xxx < 18, "Adult", "Child")
-```
-
-Eller med flere variabler:
-```{r eval=FALSE}
-df_long$Task <- ifelse(
-  df_long$Condition == 'Rea.No.Int.' 
-  | df_long$Condition == 'Rea.Int.', 
-  "Reading", "Naming")
-```
-
-***
-# Almindelig plot
-### Det almindelige plot
-```{r eval=FALSE}
-plot(xvalue, yvalue, 
-     xlab = "xValue", 
-     ylab = "yValue", 
-     main = "Eksempel", 
-     ylim = c(4, 12), 
-     pch = 15, 
-     col = "red")
-```
-
-Til alm. plot kan vi tilføje en reggresionslinje
-```{r eval=FALSE}
-myline <- lm(yvalue ~ xvalue)
-abline(myline, 
-       col = "red", 
-       lty = 2)
-```
-
-Også points (fill)
-```{r eval=FALSE}
-points(x1, y1, 
-       pch = 16, 
-       col = "green")
-```
-
-Man kan også manuelt tilføje en legend
-```{r eval=FALSE}
-legend("topleft", 
-       legend = c("Naming w. int.", 
-                  "Reading w. int."), 
-       col = c("red", "green"), 
-       lty = 2:2, 
-       cex = 0.8)
-```
-
-***
-# Boxplot
-### Vi kan starte med at lave en _long datasæt for at kunne lave boxplot 
-```{r eval=FALSE}
-df_long <- df_long <- gather(df, 
-                             key = "Condition", 
-                             value = "Time")
-#For at checke om den er lavet korrekt, kan vi checke om tallene er samlet i 1 kolonne ved komandoen
+Brug gather for at samle dataene til en samlet liste, for at kunne lave boxplot
+```{r}
+df_long <- gather(df, key = "Condition", value = "Time")
+#Se listen
 head(df_long)
 ```
 
-### Vi plotter et boxplot + jitter + flipped
-```{r eval=FALSE}
-ggplot(df_long, 
-       aes(x = Condition, 
-           y = Time, 
-           color = Condition)) +
+Bar plot af den sammenlagte tid lagt oven i hinanden
+```{r}
+ggplot(df_long, aes(x = Condition, y = Time)) +
+  geom_bar(stat = "identity") +
+  coord_flip()
+```
+
+En række boxplots og points
+```{r}
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point() +
+  labs(title = "Points")
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  labs(title = "Boxplot")
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_point() +
+  labs(title = "Boxplot with points")
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_boxplot() +
   geom_jitter() +
+  labs(title = "Boxplot with jitter")
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_violin() +
+  labs(title = "Violin")
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_violin() +
   coord_flip() +
-  theme_classic()
-```
-
-### Vi kan plotte variablerne fra datasættet som bar
-```{r eval=FALSE}
-ggplot(df_long, 
-       aes(xvalue, 
-           yvalue)) +
-  geom_bar() 
-#Eller som 'Condition' og 'Time', siden vi allerede har defineret variablerne i vores gather():
-ggplot(df_long, 
-       aes, 
-       x = Condition, 
-       y = Time) +
-  geom_bar()
-#Hvis dette ikke virker, skal man nogle gange bruge geom_bar(stat = "identity"):
-ggplot(df_long, 
-       aes(xvalue, 
-           yvalue)) +
-  geom_bar(stat = "identity") 
-```
-
-### Hvis vi vil lave en sammenligning kan dette gøre på flere forskellige måder
-Vi kan bruge patchwork
-```{r eval=FALSE}
-p1 <- ggplot(df_long1, 
-             aes(xvalue, 
-                 yvalue)) +
-  geom_bar() 
-p2 <- ggplot(df_long2, 
-             aes(xvalue, 
-                 yvalue)) +
-  geom_bar() 
-p1 + p2
-```
-
-Vi kan fjerne den ene color for at sammenligne de to boxplots
-```{r eval=FALSE}
-  + theme(legend.position = "none")
-```
-
-Det er typisk også en god ide at sætte en begrænsning for y-aksen, for at fastholde sammenligningen
-```{r eval=FALSE}
-  + ylim(2, 16)
-```
-
-Og for at gøre den pænere
-```{r eval=FALSE}
-  + theme_classic() 
-```
-
-Derudover kan man rotere x-akse-mærkaterne 90 grader, hvis mærkaterne er for lange
-```{r eval=FALSE}
-p1 + 
-  theme(axis.text.x = element_text(angle = 90, 
-                                   hjust = 1)) + 
-  p2 + 
-  theme(axis.text.x = element_text(angle = 90, 
-                                   hjust = 1))
+  labs(title = "Flipped violin")
 ```
 
 ***
-# Variabler i forhold til hinanden
-### Start med at kør plottet
-```{r eval=FALSE}
-ggplot(df, 
-       aes(df$xxx1, 
-           df$xxx2)) +
-  geom_point()
+# Opgave 2
+## Sammenhold tid i forhold til køn
+Slet global enviorment og hent filen igen
+```{r}
+rm(list = ls())
+df <- read.csv("animals.csv", sep = ";")
 ```
 
-### Man kan også sammenholde to variabler med en tredje 
-Jeg er dog ret sikker på at den tredje variable skal være en faktor - derfor definerer vi den inde i plottet som 'factor'
-```{r eval=FALSE}
-ggplot(df, 
-       aes(df$xxx1, 
-           df$xxx2, 
-           fill = factor(xxx))) +
-  geom_bar()
+Se fordelingen
+```{r}
+table(df$Køn)
 ```
 
-### Navngiv akser og plot
-```{r eval=FALSE}
-+ ylab("Timers søvn") +
+Fjern irrellevante kolonner 
+```{r}
+df$Participant.ID <- NULL
+df$Timers.søvn <- NULL
+df$Prøvet.før. <- NULL
+df$Andre.noter <- NULL
+```
+
+Omdøb igen
+```{r}
+colnames(df)[1] <- "Reading no int."
+colnames(df)[2] <- "Naming no int."
+colnames(df)[3] <- "Reading with int."
+colnames(df)[4] <- "Naming with int."
+```
+
+Lav en variabel med ifelse
+```{r}
+df$Køn <-  ifelse(df$Køn == "Mand", 1, 0)
+```
+
+Sorter kvinder fra mænd 
+```{r}
+Mænd <- subset(df, df$Køn == 1)
+Kvinder <- subset(df, df$Køn == 0)
+```
+
+Fjern irrellevante kolonner 
+```{r}
+Kvinder$Køn <- NULL
+Mænd$Køn <- NULL
+```
+
+Brug igen gather for mænd og kvinder
+```{r}
+Mænd_long <- gather(Mænd, key = "Condition", value = "Time")
+Kvinder_long <- gather(Kvinder, key = "Condition", value = "Time")
+```
+
+Sammenhold 
+```{r}
+library(patchwork)
+mp <- ggplot(Mænd_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point() +
+  ylim(3,16) +
+  theme(legend.position = "none") +
+  labs(title = "Mænd")
+kp <- ggplot(Kvinder_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point() +
+  ylim(3, 16) +
+  labs(title = "Kvinder")
+mp + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + kp + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+mb <- ggplot(Mænd_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  ylim(3, 16) +
+  theme(legend.position = "none") +
+  labs(title = "Mænd")
+kb <- ggplot(Kvinder_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  ylim(3, 16) +
+  labs(title = "Kvinder")
+mb + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + kb + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+***
+# Opgave 3
+## Sammenhold betingelsen "Naming with interference" med 'Timers søvn'
+Slet global enviorment og hent filen igen
+```{r}
+rm(list = ls())
+df <- read.csv("animals.csv", sep = ";")
+```
+
+Fjern irrelevante kolonner 
+```{r}
+df$Participant.ID <- NULL
+df$Køn <- NULL
+df$Prøvet.før. <- NULL
+df$Andre.noter <- NULL
+```
+
+Omdøb kolonnerne 
+```{r}
+colnames(df)[1] <- "Reading no int."
+colnames(df)[2] <- "Naming no int."
+colnames(df)[3] <- "Reading w. int."
+colnames(df)[4] <- "Naming w. int."
+```
+
+Kør plottet
+```{r warning=FALSE}
+p <- ggplot(df, aes(df$`Naming w. int.`, df$Timers.søvn)) +
+  geom_point() +
+  theme_classic() +
+  geom_smooth(method = "lm", se = FALSE, col = "red") +
+  ylab("Timers søvn") +
   xlab("Tid") +
   labs(title = "Naming with interference vs timer søvn")
+p + annotate("text", x = 12, y = 8.5, label = "p-value 0.1093", color = "red")
 ```
 
-### Indsæt reggresionen
-```{r eval=FALSE}
-+ geom_smooth(method = "lm", 
-              se = FALSE, 
-              col = "red")
-```
-
-
-### Analyser reggresion med summary og notér en værdi som label
-```{r eval=FALSE}
-p + annotate("text", 
-             x = 12, 
-             y = 8.5, 
-             label = "p-value 0.1093", 
-             color = "red")
+Analyser regressionen:
+```{r}
+nvst <- lm(df$`Naming w. int.` ~ df$Timers.søvn)
+summary(nvst)
 ```
 
 ***
-# Ekstra ting
-### Fjern NA
-```{r eval=FALSE}
-x[!is.na(x)]
+# Opgave 4
+## Sammehold betingelsen "Naming no interference" med 'Timers søvn'
+Slet global enviorment og hent filen igen
+```{r}
+rm(list = ls())
+df <- read.csv("animals.csv", sep = ";")
+```
+Fjern irrelevante kolonner 
+```{r}
+df$Participant.ID <- NULL
+df$Køn <- NULL
+df$Prøvet.før. <- NULL
+df$Andre.noter <- NULL
 ```
 
-### Find p-værdi osv.
-```{r eval=FALSE}
-myline_rd <- lm(faktor1 ~ faktor2)
-summary(myline_rd)
+Omdøb kolonnerne 
+```{r}
+colnames(df)[1] <- "Reading no int."
+colnames(df)[2] <- "Naming no int."
+colnames(df)[3] <- "Reading w. int."
+colnames(df)[4] <- "Naming w. int."
 ```
 
-### Brug table til at finde en oversigt
-```{r eval=FALSE}
-table(df$xxx1)
+Kør plottet
+```{r warning=FALSE}
+p <- ggplot(df, aes(df$`Naming no int.`, df$Timers.søvn)) +
+  geom_point() +
+  theme_classic() +
+  geom_smooth(method = "lm", se = FALSE, col = "red") +
+  ylab("Timers søvn") +
+  xlab("Tid") +
+  labs(title = "Naming no interference vs timer søvn")
+p + annotate("text", x = 9, y = 8, label = "p-value: 0.7522", color = "red")
 ```
 
-
-### Find gennemsnittet
-```{r eval=FALSE}
-p <- mean(df$xxx)
+Analyser regressionen
+```{r}
+nvst <- lm(df$`Naming no int.` ~ df$Timers.søvn)
+summary(nvst)
 ```
 
-Et eksempel på et mere kompliceret plot hvor man sammenligner gennemsnittet for forskellige år
-```{r eval=FALSE}
-#Sammenlign naming_int med hinanden
-av2015 <- mean(df_2015$Naming_Int)
-av2016 <- mean(df_2016$Naming_Int)
-av2017 <- mean(df_2017$Naming_Int)
-av2018 <- mean(df_2018$Naming_Int)
-av2019 <- mean(df_vores$Naming..int.)
-#Sammenlign reading_int med hinanden
-av_rd_2015 <- mean(df_2015$Reading_Int)
-av_rd_2016 <- mean(df_2016$Reading_Int)
-av_rd_2017 <- mean(df_2017$Reading_Int)
-av_rd_2018 <- mean(df_2018$Reading_Int)
-av_rd_2019 <- mean(df_vores$Reading..int.)
-#Definer dem som variabler 
-av_na_long <- c(av2015, 
-                av2016, 
-                av2017, 
-                av2018, 
-                av2019)
-years <- c(2015, 
-           2016, 
-           2017, 
-           2018, 
-           2019)
-y1 <- c(av_rd_2015, 
-        av_rd_2016, 
-        av_rd_2017, 
-        av_rd_2018, 
-        av_rd_2019)
-x1 <- c(2015, 
-        2016, 
-        2017, 
-        2018, 
-        2019)
-#Plot det
-plot(years, 
-     av_na_long, 
-     xlab = "Years", 
-     ylab = "Seconds", 
-     main = "Average time over the years", 
-     ylim = c(4, 12), 
-     pch = 15, 
-     col = "red")
-myline <- lm(av_na_long ~ years)
-abline(myline, 
-       col = "red", 
-       lty = 2)
-points(x1, y1, 
-       pch = 16, 
-       col = "green")
-myline_rd <- lm(y1 ~ x1)
-abline(myline_rd, 
-       col = "green", 
-       lty = 2)
-legend("topleft", 
-       legend = c("Naming w. int.", "Reading w. int."), 
-       col = c("red", "green"), 
-       lty = 2:2, 
-       cex = 0.8)
+***
+# Opgave 5
+## Prøv at undersøg om det er en fordel af have prøvet en lignende test
+Slet global enviorment og kør filen
+```{r}
+rm(list = ls())
+df <- read.csv("animals.csv", sep = ";")
 ```
 
+Check table
+```{r}
+table(df$Prøvet.før.)
+```
+
+Fjern irrelevante kolonner
+```{r} 
+df$Participant.ID <- NULL
+df$Køn <- NULL
+df$Timers.søvn <- NULL
+df$Andre.noter <- NULL
+```
+
+Omdøb kolonnerne 
+```{r} 
+colnames(df)[1] <- "Reading no int."
+colnames(df)[2] <- "Naming no int."
+colnames(df)[3] <- "Reading w. int."
+colnames(df)[4] <- "Naming w. int."
+```
+
+Sortér lortet
+```{r} 
+pf <- subset(df, df$Prøvet.før. == "Ja")
+ipf <- subset(df, df$Prøvet.før. == "Nej")
+```
+
+Slet irrellevante kolonner
+```{r} 
+pf$Prøvet.før. <- NULL
+ipf$Prøvet.før. <- NULL
+```
+
+Lav en gather og formatér til numeric 
+```{r} 
+pf_long <- gather(pf, key = "Condition", value = "Time")
+pf_long$Time <- as.numeric(pf_long$Time)
+ipf_long <- gather(ipf, key = "Condition", value = "Time")
+ipf_long$Time <- as.numeric(ipf_long$Time)
+```
+
+Plot svinet som points
+```{r}
+p <- ggplot(pf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = "Har prøvet før") +
+ theme(legend.position = 'none')
+b <- ggplot(ipf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = "Har ikke prøvet før")
+p + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + b + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+Plot svinet som boxplots
+```{r}
+n <- ggplot(pf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = "Har prøvet før") +
+  theme(legend.position = "none")
+m <- ggplot(ipf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = "Har ikke prøvet før")
+n + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + m + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+og som violiner
+```{r}
+c <- ggplot(pf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_violin() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = "Har prøvet før") +
+   theme(legend.position = "none")
+v <- ggplot(ipf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_violin() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = "Har ikke prøvet før")
+c + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + v + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+***

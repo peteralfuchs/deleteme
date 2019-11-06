@@ -17,19 +17,21 @@ output: html_document
 <div class="row" style="padding-top: 30px;">
 <div class="col-sm-6">
 
-# **Koder som jeg glemmer**
+# **Peter Fuchs**
 
 ## Hilsen
 
-Hej Peter. Shit du er god, at du lige har lavet den her hjemmeside til dig selv. Tak gamle Peter.
+Hej dejlige studiegruppe 2.01 - her er mit bud den statistiske del af testen 'Animals'. 
+Jeg har lavet det som forskellige opgaver.
+Jeg foreslår, at I sætter koden oppe i højre hjørne til at være 'Hide all code'. På den måde kan I prøve først at følge mine intrukser. Hvis I har brug for hjælp til dette, kan I se mine koder ved at trykke 'Code' til højre for intrukserne.
 
 
 </div>
 <div class="col-sm-6">
 
-### [](https://crumplab.github.io)
+### [Et lol billede](https://crumplab.github.io)
 
 <a href = "https://crumplab.github.io">
-![](https://meme.xyz/uploads/posts/t/l-36692-going-to-see-if-my-code-works-800-lines-of-codes-900-errors.jpg)
+![](images/logo.png)
 </a>
 </div>

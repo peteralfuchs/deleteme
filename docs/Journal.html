@@ -12,7 +12,7 @@
 
 
 
-<title>Koder</title>
+<title>Animals</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -349,7 +349,7 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="Journal.html">Koder</a>
+  <a href="Journal.html">Animals</a>
 </li>
 <li>
   <a href="Links.html">Links</a>
@@ -374,313 +374,319 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Koder</h1>
+<h1 class="title toc-ignore">Animals</h1>
 
 </div>
 
 
-<div id="startkoder" class="section level1">
-<h1>Startkoder</h1>
-<div id="ryd-gobal-enviroment" class="section level3">
-<h3>Ryd Gobal Enviroment</h3>
-<pre class="r"><code>rm(list = ls())</code></pre>
-</div>
-<div id="hent-filen-og-serparer-med-semikolon" class="section level3">
-<h3>Hent filen og serparer med semikolon</h3>
-<pre class="r"><code>df &lt;- read.csv(&quot;xxx&quot;, sep = &quot;;&quot;)</code></pre>
-</div>
-<div id="fjern-irrelevante-kolonner" class="section level3">
-<h3>Fjern irrelevante kolonner</h3>
-<pre class="r"><code>df$xxx &lt;- NULL</code></pre>
-<hr />
-</div>
-</div>
-<div id="eller-opret-din-egen-dataframe" class="section level1">
-<h1>Eller opret din egen dataframe</h1>
-<div id="start-med-at-skriv-data-ind" class="section level3">
-<h3>Start med at skriv data ind</h3>
-<pre class="r"><code>employee &lt;- c(&#39;John Doe&#39;,
-              &#39;Peter Gynn&#39;,
-              &#39;Jolie Hope&#39;)
-salary &lt;- c(21000, 
-            23400, 
-            26800)
-startdate &lt;- as.Date(c(&#39;2010-11-1&#39;,
-                       &#39;2008-3-25&#39;,
-                       &#39;2007-3-14&#39;))</code></pre>
-</div>
-<div id="sa-lav-dataframe-med-disse-kolonner" class="section level3">
-<h3>Så lav dataframe med disse kolonner</h3>
-<pre class="r"><code>employ.data &lt;- data.frame(employee, 
-                          salary, 
-                          startdate)</code></pre>
-<p>Check data ved at kigge i Global Environment eller ved brug at str()</p>
-<pre class="r"><code>str(employ.data)</code></pre>
-<hr />
-</div>
-</div>
-<div id="forbered-data" class="section level1">
-<h1>Forbered data</h1>
-<div id="load-dine-pakker" class="section level3">
-<h3>Load dine pakker</h3>
-<pre class="r"><code>#Basispakken:
-library(tidyverse)
-#Denne pakke gør det muligt, at plotte flere plots i samme billede:
-library(patchwork)</code></pre>
-</div>
-<div id="check-hvilken-kategori-dit-data-har-ved-at-klikke-pa-fold-ud-i-gobal-environment." class="section level3">
-<h3>Check hvilken kategori dit data har ved at klikke på ‘fold ud’ i Gobal Environment.</h3>
-<p>Det er vigtigt at kategorierne passer allerede her i processen - hvis de ikke passer, kan en af følgende koder bruges</p>
-<pre class="r"><code>df$xxx &lt;- as.numeric(df$xxx)
-df$xxx &lt;- as.factor(df$xxx)</code></pre>
-<p>Du kan også checke kategorierne ved brug at str()</p>
-<pre class="r"><code>str(df)</code></pre>
-</div>
-<div id="omdb-kolonner" class="section level3">
-<h3>Omdøb kolonner</h3>
-<pre class="r"><code>colnames(df)[1] &lt;- &quot;xxxx&quot;
-colnames(df)[2] &lt;- &quot;xxxx&quot;
-colnames(df)[3] &lt;- &quot;xxxx&quot;
-colnames(df)[4] &lt;- &quot;xxxx&quot;</code></pre>
-</div>
-<div id="sorter-kolonner-med-subset" class="section level3">
-<h3>Sorter kolonner med subset()</h3>
-<pre class="r"><code>xxxx &lt;- subset(df, df$xxx == 1)</code></pre>
-<p>Et eksempel på en kompliceret sortering</p>
-<pre class="r"><code>child &lt;- subset(train, train$Age &lt; 10)
-young &lt;- subset(train, train$Age &gt;= 10 &amp; train$Age &lt; 20)
-adult &lt;- subset(train, train$Age &gt;= 20 &amp; train$Age &lt; 40)
-elder &lt;- subset(train, train$Age &gt;= 40 &amp; train$Age &lt; 60)
-old &lt;- subset(train, train$Age &gt; 60)</code></pre>
-</div>
-<div id="lav-en-ny-kolonne-med-ifelse" class="section level3">
-<h3>Lav en ny kolonne med “ifelse”</h3>
-<p>Lav en ny kolonne, der siger at: “hvis variablen i df$ny siger”Ja“, så skriv 1, ellers skriv 0”</p>
-<pre class="r"><code>df$ny &lt;- ifelse(df$xxx, &quot;Ja&quot;, 1, 0)</code></pre>
-<p>Den kan også se sådan ud:</p>
-<pre class="r"><code>df$ny &lt;- ifelse(df$xxx &lt; 18, &quot;Adult&quot;, &quot;Child&quot;)</code></pre>
-<p>Eller med flere variabler:</p>
-<pre class="r"><code>df_long$Task &lt;- ifelse(
-  df_long$Condition == &#39;Rea.No.Int.&#39; 
-  | df_long$Condition == &#39;Rea.Int.&#39;, 
-  &quot;Reading&quot;, &quot;Naming&quot;)</code></pre>
-<hr />
-</div>
-</div>
-<div id="almindelig-plot" class="section level1">
-<h1>Almindelig plot</h1>
-<div id="det-almindelige-plot" class="section level3">
-<h3>Det almindelige plot</h3>
-<pre class="r"><code>plot(xvalue, yvalue, 
-     xlab = &quot;xValue&quot;, 
-     ylab = &quot;yValue&quot;, 
-     main = &quot;Eksempel&quot;, 
-     ylim = c(4, 12), 
-     pch = 15, 
-     col = &quot;red&quot;)</code></pre>
-<p>Til alm. plot kan vi tilføje en reggresionslinje</p>
-<pre class="r"><code>myline &lt;- lm(yvalue ~ xvalue)
-abline(myline, 
-       col = &quot;red&quot;, 
-       lty = 2)</code></pre>
-<p>Også points (fill)</p>
-<pre class="r"><code>points(x1, y1, 
-       pch = 16, 
-       col = &quot;green&quot;)</code></pre>
-<p>Man kan også manuelt tilføje en legend</p>
-<pre class="r"><code>legend(&quot;topleft&quot;, 
-       legend = c(&quot;Naming w. int.&quot;, 
-                  &quot;Reading w. int.&quot;), 
-       col = c(&quot;red&quot;, &quot;green&quot;), 
-       lty = 2:2, 
-       cex = 0.8)</code></pre>
-<hr />
-</div>
-</div>
-<div id="boxplot" class="section level1">
-<h1>Boxplot</h1>
-<div id="vi-kan-starte-med-at-lave-en-_long-datast-for-at-kunne-lave-boxplot" class="section level3">
-<h3>Vi kan starte med at lave en _long datasæt for at kunne lave boxplot</h3>
-<pre class="r"><code>df_long &lt;- df_long &lt;- gather(df, 
-                             key = &quot;Condition&quot;, 
-                             value = &quot;Time&quot;)
-#For at checke om den er lavet korrekt, kan vi checke om tallene er samlet i 1 kolonne ved komandoen
+<div id="opgave-1" class="section level1">
+<h1>Opgave 1</h1>
+<div id="boxplot-tiden-for-de-forskellige-betingelser" class="section level2">
+<h2>Boxplot tiden for de forskellige betingelser</h2>
+<p>Ryd global enviorment og hent filen (en god ide, er at sætte dit work directory inden, f.eks. til dit skrivebord eller et andet sted, du ved hvor er. &quot;Session - Set Working Directory - Choose Directory)</p>
+<pre class="r"><code>rm(list = ls())
+df &lt;- read.csv(&quot;animals.csv&quot;, sep = &quot;;&quot;)</code></pre>
+<p>Fjern irrelevante kolonner:</p>
+<pre class="r"><code>df$Participant.ID &lt;- NULL
+df$Køn &lt;- NULL
+df$Timers.søvn &lt;- NULL
+df$Prøvet.før. &lt;- NULL
+df$Andre.noter &lt;- NULL</code></pre>
+<p>Load tidyverse</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<p>Omdøb kolonnerne</p>
+<pre class="r"><code>colnames(df)[1] &lt;- &quot;Reading no int.&quot;
+colnames(df)[2] &lt;- &quot;Naming no int.&quot;
+colnames(df)[3] &lt;- &quot;Reading w. int.&quot;
+colnames(df)[4] &lt;- &quot;Naming w. int.&quot;</code></pre>
+<p>Brug gather for at samle dataene til en samlet liste, for at kunne lave boxplot</p>
+<pre class="r"><code>df_long &lt;- gather(df, key = &quot;Condition&quot;, value = &quot;Time&quot;)
+#Se listen
 head(df_long)</code></pre>
-</div>
-<div id="vi-plotter-et-boxplot-jitter-flipped" class="section level3">
-<h3>Vi plotter et boxplot + jitter + flipped</h3>
-<pre class="r"><code>ggplot(df_long, 
-       aes(x = Condition, 
-           y = Time, 
-           color = Condition)) +
+<pre><code>##         Condition Time
+## 1 Reading no int. 5.43
+## 2 Reading no int. 4.38
+## 3 Reading no int. 5.11
+## 4 Reading no int. 5.83
+## 5 Reading no int. 4.86
+## 6 Reading no int. 7.31</code></pre>
+<p>Bar plot af den sammenlagte tid lagt oven i hinanden</p>
+<pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  coord_flip()</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>En række boxplots og points</p>
+<pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point() +
+  labs(title = &quot;Points&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  labs(title = &quot;Boxplot&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_point() +
+  labs(title = &quot;Boxplot with points&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
+<pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
   geom_boxplot() +
   geom_jitter() +
+  labs(title = &quot;Boxplot with jitter&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-7-4.png" width="672" /></p>
+<pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_violin() +
+  labs(title = &quot;Violin&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-7-5.png" width="672" /></p>
+<pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_violin() +
   coord_flip() +
-  theme_classic()</code></pre>
-</div>
-<div id="vi-kan-plotte-variablerne-fra-datasttet-som-bar" class="section level3">
-<h3>Vi kan plotte variablerne fra datasættet som bar</h3>
-<pre class="r"><code>ggplot(df_long, 
-       aes(xvalue, 
-           yvalue)) +
-  geom_bar() 
-#Eller som &#39;Condition&#39; og &#39;Time&#39;, siden vi allerede har defineret variablerne i vores gather():
-ggplot(df_long, 
-       aes, 
-       x = Condition, 
-       y = Time) +
-  geom_bar()
-#Hvis dette ikke virker, skal man nogle gange bruge geom_bar(stat = &quot;identity&quot;):
-ggplot(df_long, 
-       aes(xvalue, 
-           yvalue)) +
-  geom_bar(stat = &quot;identity&quot;) </code></pre>
-</div>
-<div id="hvis-vi-vil-lave-en-sammenligning-kan-dette-gre-pa-flere-forskellige-mader" class="section level3">
-<h3>Hvis vi vil lave en sammenligning kan dette gøre på flere forskellige måder</h3>
-<p>Vi kan bruge patchwork</p>
-<pre class="r"><code>p1 &lt;- ggplot(df_long1, 
-             aes(xvalue, 
-                 yvalue)) +
-  geom_bar() 
-p2 &lt;- ggplot(df_long2, 
-             aes(xvalue, 
-                 yvalue)) +
-  geom_bar() 
-p1 + p2</code></pre>
-<p>Vi kan fjerne den ene color for at sammenligne de to boxplots</p>
-<pre class="r"><code>  + theme(legend.position = &quot;none&quot;)</code></pre>
-<p>Det er typisk også en god ide at sætte en begrænsning for y-aksen, for at fastholde sammenligningen</p>
-<pre class="r"><code>  + ylim(2, 16)</code></pre>
-<p>Og for at gøre den pænere</p>
-<pre class="r"><code>  + theme_classic() </code></pre>
-<p>Derudover kan man rotere x-akse-mærkaterne 90 grader, hvis mærkaterne er for lange</p>
-<pre class="r"><code>p1 + 
-  theme(axis.text.x = element_text(angle = 90, 
-                                   hjust = 1)) + 
-  p2 + 
-  theme(axis.text.x = element_text(angle = 90, 
-                                   hjust = 1))</code></pre>
+  labs(title = &quot;Flipped violin&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-7-6.png" width="672" /></p>
 <hr />
 </div>
 </div>
-<div id="variabler-i-forhold-til-hinanden" class="section level1">
-<h1>Variabler i forhold til hinanden</h1>
-<div id="start-med-at-kr-plottet" class="section level3">
-<h3>Start med at kør plottet</h3>
-<pre class="r"><code>ggplot(df, 
-       aes(df$xxx1, 
-           df$xxx2)) +
-  geom_point()</code></pre>
+<div id="opgave-2" class="section level1">
+<h1>Opgave 2</h1>
+<div id="sammenhold-tid-i-forhold-til-kn" class="section level2">
+<h2>Sammenhold tid i forhold til køn</h2>
+<p>Slet global enviorment og hent filen igen</p>
+<pre class="r"><code>rm(list = ls())
+df &lt;- read.csv(&quot;animals.csv&quot;, sep = &quot;;&quot;)</code></pre>
+<p>Se fordelingen</p>
+<pre class="r"><code>table(df$Køn)</code></pre>
+<pre><code>## 
+## Kvinde   Mand 
+##     17      4</code></pre>
+<p>Fjern irrellevante kolonner</p>
+<pre class="r"><code>df$Participant.ID &lt;- NULL
+df$Timers.søvn &lt;- NULL
+df$Prøvet.før. &lt;- NULL
+df$Andre.noter &lt;- NULL</code></pre>
+<p>Omdøb igen</p>
+<pre class="r"><code>colnames(df)[1] &lt;- &quot;Reading no int.&quot;
+colnames(df)[2] &lt;- &quot;Naming no int.&quot;
+colnames(df)[3] &lt;- &quot;Reading with int.&quot;
+colnames(df)[4] &lt;- &quot;Naming with int.&quot;</code></pre>
+<p>Lav en variabel med ifelse</p>
+<pre class="r"><code>df$Køn &lt;-  ifelse(df$Køn == &quot;Mand&quot;, 1, 0)</code></pre>
+<p>Sorter kvinder fra mænd</p>
+<pre class="r"><code>Mænd &lt;- subset(df, df$Køn == 1)
+Kvinder &lt;- subset(df, df$Køn == 0)</code></pre>
+<p>Fjern irrellevante kolonner</p>
+<pre class="r"><code>Kvinder$Køn &lt;- NULL
+Mænd$Køn &lt;- NULL</code></pre>
+<p>Brug igen gather for mænd og kvinder</p>
+<pre class="r"><code>Mænd_long &lt;- gather(Mænd, key = &quot;Condition&quot;, value = &quot;Time&quot;)
+Kvinder_long &lt;- gather(Kvinder, key = &quot;Condition&quot;, value = &quot;Time&quot;)</code></pre>
+<p>Sammenhold</p>
+<pre class="r"><code>library(patchwork)
+mp &lt;- ggplot(Mænd_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point() +
+  ylim(3,16) +
+  theme(legend.position = &quot;none&quot;) +
+  labs(title = &quot;Mænd&quot;)
+kp &lt;- ggplot(Kvinder_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point() +
+  ylim(3, 16) +
+  labs(title = &quot;Kvinder&quot;)
+mp + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + kp + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<pre class="r"><code>mb &lt;- ggplot(Mænd_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  ylim(3, 16) +
+  theme(legend.position = &quot;none&quot;) +
+  labs(title = &quot;Mænd&quot;)
+kb &lt;- ggplot(Kvinder_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  ylim(3, 16) +
+  labs(title = &quot;Kvinder&quot;)
+mb + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + kb + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
+<hr />
 </div>
-<div id="man-kan-ogsa-sammenholde-to-variabler-med-en-tredje" class="section level3">
-<h3>Man kan også sammenholde to variabler med en tredje</h3>
-<p>Jeg er dog ret sikker på at den tredje variable skal være en faktor - derfor definerer vi den inde i plottet som ‘factor’</p>
-<pre class="r"><code>ggplot(df, 
-       aes(df$xxx1, 
-           df$xxx2, 
-           fill = factor(xxx))) +
-  geom_bar()</code></pre>
 </div>
-<div id="navngiv-akser-og-plot" class="section level3">
-<h3>Navngiv akser og plot</h3>
-<pre class="r"><code>+ ylab(&quot;Timers søvn&quot;) +
+<div id="opgave-3" class="section level1">
+<h1>Opgave 3</h1>
+<div id="sammenhold-betingelsen-naming-with-interference-med-timers-svn" class="section level2">
+<h2>Sammenhold betingelsen “Naming with interference” med ‘Timers søvn’</h2>
+<p>Slet global enviorment og hent filen igen</p>
+<pre class="r"><code>rm(list = ls())
+df &lt;- read.csv(&quot;animals.csv&quot;, sep = &quot;;&quot;)</code></pre>
+<p>Fjern irrelevante kolonner</p>
+<pre class="r"><code>df$Participant.ID &lt;- NULL
+df$Køn &lt;- NULL
+df$Prøvet.før. &lt;- NULL
+df$Andre.noter &lt;- NULL</code></pre>
+<p>Omdøb kolonnerne</p>
+<pre class="r"><code>colnames(df)[1] &lt;- &quot;Reading no int.&quot;
+colnames(df)[2] &lt;- &quot;Naming no int.&quot;
+colnames(df)[3] &lt;- &quot;Reading w. int.&quot;
+colnames(df)[4] &lt;- &quot;Naming w. int.&quot;</code></pre>
+<p>Kør plottet</p>
+<pre class="r"><code>p &lt;- ggplot(df, aes(df$`Naming w. int.`, df$Timers.søvn)) +
+  geom_point() +
+  theme_classic() +
+  geom_smooth(method = &quot;lm&quot;, se = FALSE, col = &quot;red&quot;) +
+  ylab(&quot;Timers søvn&quot;) +
   xlab(&quot;Tid&quot;) +
-  labs(title = &quot;Naming with interference vs timer søvn&quot;)</code></pre>
-</div>
-<div id="indst-reggresionen" class="section level3">
-<h3>Indsæt reggresionen</h3>
-<pre class="r"><code>+ geom_smooth(method = &quot;lm&quot;, 
-              se = FALSE, 
-              col = &quot;red&quot;)</code></pre>
-</div>
-<div id="analyser-reggresion-med-summary-og-noter-en-vrdi-som-label" class="section level3">
-<h3>Analyser reggresion med summary og notér en værdi som label</h3>
-<pre class="r"><code>p + annotate(&quot;text&quot;, 
-             x = 12, 
-             y = 8.5, 
-             label = &quot;p-value 0.1093&quot;, 
-             color = &quot;red&quot;)</code></pre>
+  labs(title = &quot;Naming with interference vs timer søvn&quot;)
+p + annotate(&quot;text&quot;, x = 12, y = 8.5, label = &quot;p-value 0.1093&quot;, color = &quot;red&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Analyser regressionen:</p>
+<pre class="r"><code>nvst &lt;- lm(df$`Naming w. int.` ~ df$Timers.søvn)
+summary(nvst)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = df$`Naming w. int.` ~ df$Timers.søvn)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.4965 -1.7205 -0.7544  2.1656  4.3577 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)      4.7629     2.6876   1.772   0.0967 .
+## df$Timers.søvn   0.6239     0.3665   1.702   0.1093  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.273 on 15 degrees of freedom
+##   (4 observations deleted due to missingness)
+## Multiple R-squared:  0.1619, Adjusted R-squared:  0.106 
+## F-statistic: 2.898 on 1 and 15 DF,  p-value: 0.1093</code></pre>
 <hr />
 </div>
 </div>
-<div id="ekstra-ting" class="section level1">
-<h1>Ekstra ting</h1>
-<div id="fjern-na" class="section level3">
-<h3>Fjern NA</h3>
-<pre class="r"><code>x[!is.na(x)]</code></pre>
+<div id="opgave-4" class="section level1">
+<h1>Opgave 4</h1>
+<div id="sammehold-betingelsen-naming-no-interference-med-timers-svn" class="section level2">
+<h2>Sammehold betingelsen “Naming no interference” med ‘Timers søvn’</h2>
+<p>Slet global enviorment og hent filen igen</p>
+<pre class="r"><code>rm(list = ls())
+df &lt;- read.csv(&quot;animals.csv&quot;, sep = &quot;;&quot;)</code></pre>
+<p>Fjern irrelevante kolonner</p>
+<pre class="r"><code>df$Participant.ID &lt;- NULL
+df$Køn &lt;- NULL
+df$Prøvet.før. &lt;- NULL
+df$Andre.noter &lt;- NULL</code></pre>
+<p>Omdøb kolonnerne</p>
+<pre class="r"><code>colnames(df)[1] &lt;- &quot;Reading no int.&quot;
+colnames(df)[2] &lt;- &quot;Naming no int.&quot;
+colnames(df)[3] &lt;- &quot;Reading w. int.&quot;
+colnames(df)[4] &lt;- &quot;Naming w. int.&quot;</code></pre>
+<p>Kør plottet</p>
+<pre class="r"><code>p &lt;- ggplot(df, aes(df$`Naming no int.`, df$Timers.søvn)) +
+  geom_point() +
+  theme_classic() +
+  geom_smooth(method = &quot;lm&quot;, se = FALSE, col = &quot;red&quot;) +
+  ylab(&quot;Timers søvn&quot;) +
+  xlab(&quot;Tid&quot;) +
+  labs(title = &quot;Naming no interference vs timer søvn&quot;)
+p + annotate(&quot;text&quot;, x = 9, y = 8, label = &quot;p-value: 0.7522&quot;, color = &quot;red&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Analyser regressionen</p>
+<pre class="r"><code>nvst &lt;- lm(df$`Naming no int.` ~ df$Timers.søvn)
+summary(nvst)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = df$`Naming no int.` ~ df$Timers.søvn)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.1850 -0.7136 -0.3764  0.4008  2.7834 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      7.1440     1.3042   5.477 6.37e-05 ***
+## df$Timers.søvn  -0.0572     0.1779  -0.322    0.752    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.103 on 15 degrees of freedom
+##   (4 observations deleted due to missingness)
+## Multiple R-squared:  0.006847,   Adjusted R-squared:  -0.05936 
+## F-statistic: 0.1034 on 1 and 15 DF,  p-value: 0.7522</code></pre>
+<hr />
 </div>
-<div id="find-p-vrdi-osv." class="section level3">
-<h3>Find p-værdi osv.</h3>
-<pre class="r"><code>myline_rd &lt;- lm(faktor1 ~ faktor2)
-summary(myline_rd)</code></pre>
 </div>
-<div id="brug-table-til-at-finde-en-oversigt" class="section level3">
-<h3>Brug table til at finde en oversigt</h3>
-<pre class="r"><code>table(df$xxx1)</code></pre>
-</div>
-<div id="find-gennemsnittet" class="section level3">
-<h3>Find gennemsnittet</h3>
-<pre class="r"><code>p &lt;- mean(df$xxx)</code></pre>
-<p>Et eksempel på et mere kompliceret plot hvor man sammenligner gennemsnittet for forskellige år</p>
-<pre class="r"><code>#Sammenlign naming_int med hinanden
-av2015 &lt;- mean(df_2015$Naming_Int)
-av2016 &lt;- mean(df_2016$Naming_Int)
-av2017 &lt;- mean(df_2017$Naming_Int)
-av2018 &lt;- mean(df_2018$Naming_Int)
-av2019 &lt;- mean(df_vores$Naming..int.)
-#Sammenlign reading_int med hinanden
-av_rd_2015 &lt;- mean(df_2015$Reading_Int)
-av_rd_2016 &lt;- mean(df_2016$Reading_Int)
-av_rd_2017 &lt;- mean(df_2017$Reading_Int)
-av_rd_2018 &lt;- mean(df_2018$Reading_Int)
-av_rd_2019 &lt;- mean(df_vores$Reading..int.)
-#Definer dem som variabler 
-av_na_long &lt;- c(av2015, 
-                av2016, 
-                av2017, 
-                av2018, 
-                av2019)
-years &lt;- c(2015, 
-           2016, 
-           2017, 
-           2018, 
-           2019)
-y1 &lt;- c(av_rd_2015, 
-        av_rd_2016, 
-        av_rd_2017, 
-        av_rd_2018, 
-        av_rd_2019)
-x1 &lt;- c(2015, 
-        2016, 
-        2017, 
-        2018, 
-        2019)
-#Plot det
-plot(years, 
-     av_na_long, 
-     xlab = &quot;Years&quot;, 
-     ylab = &quot;Seconds&quot;, 
-     main = &quot;Average time over the years&quot;, 
-     ylim = c(4, 12), 
-     pch = 15, 
-     col = &quot;red&quot;)
-myline &lt;- lm(av_na_long ~ years)
-abline(myline, 
-       col = &quot;red&quot;, 
-       lty = 2)
-points(x1, y1, 
-       pch = 16, 
-       col = &quot;green&quot;)
-myline_rd &lt;- lm(y1 ~ x1)
-abline(myline_rd, 
-       col = &quot;green&quot;, 
-       lty = 2)
-legend(&quot;topleft&quot;, 
-       legend = c(&quot;Naming w. int.&quot;, &quot;Reading w. int.&quot;), 
-       col = c(&quot;red&quot;, &quot;green&quot;), 
-       lty = 2:2, 
-       cex = 0.8)</code></pre>
+<div id="opgave-5" class="section level1">
+<h1>Opgave 5</h1>
+<div id="prv-at-undersg-om-det-er-en-fordel-af-have-prvet-en-lignende-test" class="section level2">
+<h2>Prøv at undersøg om det er en fordel af have prøvet en lignende test</h2>
+<p>Slet global enviorment og kør filen</p>
+<pre class="r"><code>rm(list = ls())
+df &lt;- read.csv(&quot;animals.csv&quot;, sep = &quot;;&quot;)</code></pre>
+<p>Check table</p>
+<pre class="r"><code>table(df$Prøvet.før.)</code></pre>
+<pre><code>## 
+##      Ja Nej 
+##   5   6  10</code></pre>
+<p>Fjern irrelevante kolonner</p>
+<pre class="r"><code>df$Participant.ID &lt;- NULL
+df$Køn &lt;- NULL
+df$Timers.søvn &lt;- NULL
+df$Andre.noter &lt;- NULL</code></pre>
+<p>Omdøb kolonnerne</p>
+<pre class="r"><code>colnames(df)[1] &lt;- &quot;Reading no int.&quot;
+colnames(df)[2] &lt;- &quot;Naming no int.&quot;
+colnames(df)[3] &lt;- &quot;Reading w. int.&quot;
+colnames(df)[4] &lt;- &quot;Naming w. int.&quot;</code></pre>
+<p>Sortér lortet</p>
+<pre class="r"><code>pf &lt;- subset(df, df$Prøvet.før. == &quot;Ja&quot;)
+ipf &lt;- subset(df, df$Prøvet.før. == &quot;Nej&quot;)</code></pre>
+<p>Slet irrellevante kolonner</p>
+<pre class="r"><code>pf$Prøvet.før. &lt;- NULL
+ipf$Prøvet.før. &lt;- NULL</code></pre>
+<p>Lav en gather og formatér til numeric</p>
+<pre class="r"><code>pf_long &lt;- gather(pf, key = &quot;Condition&quot;, value = &quot;Time&quot;)
+pf_long$Time &lt;- as.numeric(pf_long$Time)
+ipf_long &lt;- gather(ipf, key = &quot;Condition&quot;, value = &quot;Time&quot;)
+ipf_long$Time &lt;- as.numeric(ipf_long$Time)</code></pre>
+<p>Plot svinet som points</p>
+<pre class="r"><code>p &lt;- ggplot(pf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = &quot;Har prøvet før&quot;) +
+ theme(legend.position = &#39;none&#39;)
+b &lt;- ggplot(ipf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_point() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = &quot;Har ikke prøvet før&quot;)
+p + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + b + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>Plot svinet som boxplots</p>
+<pre class="r"><code>n &lt;- ggplot(pf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = &quot;Har prøvet før&quot;) +
+  theme(legend.position = &quot;none&quot;)
+m &lt;- ggplot(ipf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = &quot;Har ikke prøvet før&quot;)
+n + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + m + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>og som violiner</p>
+<pre class="r"><code>c &lt;- ggplot(pf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_violin() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = &quot;Har prøvet før&quot;) +
+   theme(legend.position = &quot;none&quot;)
+v &lt;- ggplot(ipf_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_violin() +
+  theme_classic() +
+  ylim(0, 16) +
+  labs(title = &quot;Har ikke prøvet før&quot;)
+c + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + v + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-36-1.png" width="672" /> ***</p>
 </div>
 </div>
 
@@ -721,7 +727,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
+  window.initializeCodeFolding("hide" === "show");
 });
 </script>
 
