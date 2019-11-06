@@ -1,0 +1,35 @@
+---
+title: "Peter Fuchs"
+output: html_document
+---
+
+<style type="text/css">
+.title {
+  display: none;
+}
+
+#getting-started img {
+  margin-right: 10px;
+}
+
+</style>
+
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-6">
+
+# **Koder som jeg glemmer**
+
+## Hilsen
+
+Hej fremtids-Peter. Her er den hjemmeside jeg har lavet til dig. Håber du er stolt af mig. Kh gamle Peter.
+
+
+</div>
+<div class="col-sm-6">
+
+### [](https://crumplab.github.io)
+
+<a href = "https://crumplab.github.io">
+![](https://meme.xyz/uploads/posts/t/l-36692-going-to-see-if-my-code-works-800-lines-of-codes-900-errors.jpg)
+</a>
+</div>
