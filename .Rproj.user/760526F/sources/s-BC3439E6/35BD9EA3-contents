@@ -1,0 +1,51 @@
+rm(list = ls())
+setwd("~/Desktop")
+train <- read.csv("R/Training/titanic/train.csv")
+table(train$Survived)
+table(train$Pclass)
+library(tidyverse)
+library(ggplot2)
+Survived <- train$Survived
+Class <- train$Pclass
+Fare <- train$Fare
+Age <- train$Age 
+
+View(train)
+#Opret barn/voksen-kolonne
+train$AgeGroups <- ifelse(train$Age < 18, "Child", "Adult")
+AgeGroups <- train$AgeGroups
+#Opret kolonne for at omdøbe 0/1 til død/overlevet 
+train$Survived1 <- ifelse(train$Survived < 1, "Dead", "Survived")
+Survived1 <- train$Survived1
+
+child <- subset(train, train$Age < 10)
+young <- subset(train, train$Age >= 10 & train$Age < 20)
+adult <- subset(train, train$Age >= 20 & train$Age < 40)
+elder <- subset(train, train$Age >= 40 & train$Age < 60)
+old <- subset(train, train$Age > 60)
+
+
+train$again <- ifelse(train$Age >= 10 & train$Age < 20, "Young", "0")
+train$again <- ifelse(train$Age >= 20 & train$Age < 30, "adult")
+
+if(train$Age >= 10 & train$Age < 20 "Young")
+
+child_age <- child$Age
+young_age <- young$Age
+adult_age <- adult$Age
+elder_age <- elder$Age
+old_age <- old$Age
+
+#use x[!is.na(x)] for at fjerne N/A
+
+
+ggplot(train, aes(child_age), Survived1) + geom_bar()
+
+
+ggplot(child, aes(factor(Survived1), fill = factor(child_age))) + geom_bar()
+ggplot(child, aes(factor(child_age), fill = factor(Survived1))) + geom_bar()
+
+ggplot(young, aes(factor(Survived1), fill = factor(young_age))) + geom_bar()
+ggplot(young, aes(factor(young_age), fill = factor(Survived1))) + geom_bar()
+
+ggplot(child, aes(factor(child_age), fill = factor(Survived1))) + geom_bar()

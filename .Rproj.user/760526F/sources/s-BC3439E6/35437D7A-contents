@@ -35,14 +35,22 @@ df$xxx <- NULL
 
 ### Start med at skriv data ind
 ```{r eval=FALSE}
-employee <- c('John Doe','Peter Gynn','Jolie Hope')
-salary <- c(21000, 23400, 26800)
-startdate <- as.Date(c('2010-11-1','2008-3-25','2007-3-14'))
+employee <- c('John Doe',
+              'Peter Gynn',
+              'Jolie Hope')
+salary <- c(21000, 
+            23400, 
+            26800)
+startdate <- as.Date(c('2010-11-1',
+                       '2008-3-25',
+                       '2007-3-14'))
 ```
 
 ### Så lav dataframe med disse kolonner
 ```{r eval=FALSE}
-employ.data <- data.frame(employee, salary, startdate)
+employ.data <- data.frame(employee, 
+                          salary, 
+                          startdate)
 ```
 
 Check data ved at kigge i Global Environment eller ved brug at str()
@@ -61,7 +69,8 @@ library(tidyverse)
 library(patchwork)
 ```
 
-### Check hvilken kategori dit data har ve at klikke på 'fold ud' i Gobal Environment. Det er vigtigt at kategorierne passer allerede her i processen - hvis de ikke passer, kan en af følgende koder bruges
+### Check hvilken kategori dit data har ved at klikke på 'fold ud' i Gobal Environment. 
+Det er vigtigt at kategorierne passer allerede her i processen - hvis de ikke passer, kan en af følgende koder bruges
 ```{r eval=FALSE}
 df$xxx <- as.numeric(df$xxx)
 df$xxx <- as.factor(df$xxx)
@@ -145,7 +154,8 @@ points(x1, y1,
 Man kan også manuelt tilføje en legend
 ```{r eval=FALSE}
 legend("topleft", 
-       legend = c("Naming w. int.", "Reading w. int."), 
+       legend = c("Naming w. int.", 
+                  "Reading w. int."), 
        col = c("red", "green"), 
        lty = 2:2, 
        cex = 0.8)
@@ -155,14 +165,19 @@ legend("topleft",
 # Boxplot
 ### Vi kan starte med at lave en _long datasæt for at kunne lave boxplot 
 ```{r eval=FALSE}
-df_long <- df_long <- gather(df, key = "Condition", value = "Time")
+df_long <- df_long <- gather(df, 
+                             key = "Condition", 
+                             value = "Time")
 #For at checke om den er lavet korrekt, kan vi checke om tallene er samlet i 1 kolonne ved komandoen
 head(df_long)
 ```
 
 ### Vi plotter et boxplot + jitter + flipped
 ```{r eval=FALSE}
-ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+ggplot(df_long, 
+       aes(x = Condition, 
+           y = Time, 
+           color = Condition)) +
   geom_boxplot() +
   geom_jitter() +
   coord_flip() +
@@ -171,22 +186,33 @@ ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
 
 ### Vi kan plotte variablerne fra datasættet som bar
 ```{r eval=FALSE}
-ggplot(df_long, aes(xvalue, yvalue)) +
+ggplot(df_long, 
+       aes(xvalue, 
+           yvalue)) +
   geom_bar() 
 #Eller som 'Condition' og 'Time', siden vi allerede har defineret variablerne i vores gather():
-ggplot(df_long, aes, x = Condition, y = Time) +
+ggplot(df_long, 
+       aes, 
+       x = Condition, 
+       y = Time) +
   geom_bar()
 #Hvis dette ikke virker, skal man nogle gange bruge geom_bar(stat = "identity"):
-ggplot(df_long, aes(xvalue, yvalue)) +
+ggplot(df_long, 
+       aes(xvalue, 
+           yvalue)) +
   geom_bar(stat = "identity") 
 ```
 
 ### Hvis vi vil lave en sammenligning kan dette gøre på flere forskellige måder
 Vi kan bruge patchwork
 ```{r eval=FALSE}
-p1 <- ggplot(df_long1, aes(xvalue, yvalue)) +
+p1 <- ggplot(df_long1, 
+             aes(xvalue, 
+                 yvalue)) +
   geom_bar() 
-p2 <- ggplot(df_long2, aes(xvalue, yvalue)) +
+p2 <- ggplot(df_long2, 
+             aes(xvalue, 
+                 yvalue)) +
   geom_bar() 
 p1 + p2
 ```
@@ -201,17 +227,39 @@ Det er typisk også en god ide at sætte en begrænsning for y-aksen, for at fas
   + ylim(2, 16)
 ```
 
+Og for at gøre den pænere
+```{r eval=FALSE}
+  + theme_classic() 
+```
+
 Derudover kan man rotere x-akse-mærkaterne 90 grader, hvis mærkaterne er for lange
 ```{r eval=FALSE}
-p1 + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + p2 + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+p1 + 
+  theme(axis.text.x = element_text(angle = 90, 
+                                   hjust = 1)) + 
+  p2 + 
+  theme(axis.text.x = element_text(angle = 90, 
+                                   hjust = 1))
 ```
 
 ***
 # Variabler i forhold til hinanden
 ### Start med at kør plottet
 ```{r eval=FALSE}
-ggplot(df, aes(df$xxx1, df$xxx2)) +
+ggplot(df, 
+       aes(df$xxx1, 
+           df$xxx2)) +
   geom_point()
+```
+
+### Man kan også sammenholde to variabler med en tredje 
+Jeg er dog ret sikker på at den tredje variable skal være en faktor - derfor definerer vi den inde i plottet som 'factor'
+```{r eval=FALSE}
+ggplot(df, 
+       aes(df$xxx1, 
+           df$xxx2, 
+           fill = factor(xxx))) +
+  geom_bar()
 ```
 
 ### Navngiv akser og plot
@@ -314,7 +362,9 @@ points(x1, y1,
        pch = 16, 
        col = "green")
 myline_rd <- lm(y1 ~ x1)
-abline(myline_rd, col = "green", lty = 2)
+abline(myline_rd, 
+       col = "green", 
+       lty = 2)
 legend("topleft", 
        legend = c("Naming w. int.", "Reading w. int."), 
        col = c("red", "green"), 
