@@ -2,18 +2,18 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1572162062281.000,
-    "dirty" : false,
+    "dirty" : true,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "48991740",
+    "hash" : "0",
     "id" : "D6EBD7E7",
     "lastKnownWriteTime" : 1573047544,
-    "last_content_update" : 1573047544566,
+    "last_content_update" : 1573047559257,
     "path" : "~/Uden for Clouden/GitHub files/deleteme/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
-        "cursorPosition" : "19,25",
-        "scrollLine" : "1"
+        "cursorPosition" : "24,0",
+        "scrollLine" : "13"
     },
     "read_only" : false,
     "read_only_alternatives" : [
