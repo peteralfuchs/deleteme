@@ -21,7 +21,7 @@ output: html_document
 
 ## Hilsen
 
-Heg Peter. Shit du er god, at du lige har lavet den her hjemmeside til dig selv. Tak gamle Peter.
+Hej Peter. Shit du er god, at du lige har lavet den her hjemmeside til dig selv. Tak gamle Peter.
 
 
 </div>
