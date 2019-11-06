@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "1218101085",
     "id" : "35437D7A",
-    "lastKnownWriteTime" : 1573053999,
-    "last_content_update" : 1573053999588,
+    "lastKnownWriteTime" : 1573054052,
+    "last_content_update" : 1573054052589,
     "path" : "~/Uden for Clouden/GitHub files/deleteme/Journal.Rmd",
     "project_path" : "Journal.Rmd",
     "properties" : {
-        "cursorPosition" : "1,8",
+        "cursorPosition" : "1,11",
         "scrollLine" : "0"
     },
     "read_only" : false,
