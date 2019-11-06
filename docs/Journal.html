@@ -12,7 +12,7 @@
 
 
 
-<title>Animals</title>
+<title>Koder</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -374,7 +374,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Animals</h1>
+<h1 class="title toc-ignore">Koder</h1>
 
 </div>
 
@@ -399,13 +399,21 @@ div.tocify {
 <h1>Eller opret din egen dataframe</h1>
 <div id="start-med-at-skriv-data-ind" class="section level3">
 <h3>Start med at skriv data ind</h3>
-<pre class="r"><code>employee &lt;- c(&#39;John Doe&#39;,&#39;Peter Gynn&#39;,&#39;Jolie Hope&#39;)
-salary &lt;- c(21000, 23400, 26800)
-startdate &lt;- as.Date(c(&#39;2010-11-1&#39;,&#39;2008-3-25&#39;,&#39;2007-3-14&#39;))</code></pre>
+<pre class="r"><code>employee &lt;- c(&#39;John Doe&#39;,
+              &#39;Peter Gynn&#39;,
+              &#39;Jolie Hope&#39;)
+salary &lt;- c(21000, 
+            23400, 
+            26800)
+startdate &lt;- as.Date(c(&#39;2010-11-1&#39;,
+                       &#39;2008-3-25&#39;,
+                       &#39;2007-3-14&#39;))</code></pre>
 </div>
 <div id="sa-lav-dataframe-med-disse-kolonner" class="section level3">
 <h3>Så lav dataframe med disse kolonner</h3>
-<pre class="r"><code>employ.data &lt;- data.frame(employee, salary, startdate)</code></pre>
+<pre class="r"><code>employ.data &lt;- data.frame(employee, 
+                          salary, 
+                          startdate)</code></pre>
 <p>Check data ved at kigge i Global Environment eller ved brug at str()</p>
 <pre class="r"><code>str(employ.data)</code></pre>
 <hr />
@@ -420,8 +428,9 @@ library(tidyverse)
 #Denne pakke gør det muligt, at plotte flere plots i samme billede:
 library(patchwork)</code></pre>
 </div>
-<div id="check-hvilken-kategori-dit-data-har-ve-at-klikke-pa-fold-ud-i-gobal-environment.-det-er-vigtigt-at-kategorierne-passer-allerede-her-i-processen---hvis-de-ikke-passer-kan-en-af-flgende-koder-bruges" class="section level3">
-<h3>Check hvilken kategori dit data har ve at klikke på ‘fold ud’ i Gobal Environment. Det er vigtigt at kategorierne passer allerede her i processen - hvis de ikke passer, kan en af følgende koder bruges</h3>
+<div id="check-hvilken-kategori-dit-data-har-ved-at-klikke-pa-fold-ud-i-gobal-environment." class="section level3">
+<h3>Check hvilken kategori dit data har ved at klikke på ‘fold ud’ i Gobal Environment.</h3>
+<p>Det er vigtigt at kategorierne passer allerede her i processen - hvis de ikke passer, kan en af følgende koder bruges</p>
 <pre class="r"><code>df$xxx &lt;- as.numeric(df$xxx)
 df$xxx &lt;- as.factor(df$xxx)</code></pre>
 <p>Du kan også checke kategorierne ved brug at str()</p>
@@ -480,7 +489,8 @@ abline(myline,
        col = &quot;green&quot;)</code></pre>
 <p>Man kan også manuelt tilføje en legend</p>
 <pre class="r"><code>legend(&quot;topleft&quot;, 
-       legend = c(&quot;Naming w. int.&quot;, &quot;Reading w. int.&quot;), 
+       legend = c(&quot;Naming w. int.&quot;, 
+                  &quot;Reading w. int.&quot;), 
        col = c(&quot;red&quot;, &quot;green&quot;), 
        lty = 2:2, 
        cex = 0.8)</code></pre>
@@ -491,13 +501,18 @@ abline(myline,
 <h1>Boxplot</h1>
 <div id="vi-kan-starte-med-at-lave-en-_long-datast-for-at-kunne-lave-boxplot" class="section level3">
 <h3>Vi kan starte med at lave en _long datasæt for at kunne lave boxplot</h3>
-<pre class="r"><code>df_long &lt;- df_long &lt;- gather(df, key = &quot;Condition&quot;, value = &quot;Time&quot;)
+<pre class="r"><code>df_long &lt;- df_long &lt;- gather(df, 
+                             key = &quot;Condition&quot;, 
+                             value = &quot;Time&quot;)
 #For at checke om den er lavet korrekt, kan vi checke om tallene er samlet i 1 kolonne ved komandoen
 head(df_long)</code></pre>
 </div>
 <div id="vi-plotter-et-boxplot-jitter-flipped" class="section level3">
 <h3>Vi plotter et boxplot + jitter + flipped</h3>
-<pre class="r"><code>ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+<pre class="r"><code>ggplot(df_long, 
+       aes(x = Condition, 
+           y = Time, 
+           color = Condition)) +
   geom_boxplot() +
   geom_jitter() +
   coord_flip() +
@@ -505,29 +520,47 @@ head(df_long)</code></pre>
 </div>
 <div id="vi-kan-plotte-variablerne-fra-datasttet-som-bar" class="section level3">
 <h3>Vi kan plotte variablerne fra datasættet som bar</h3>
-<pre class="r"><code>ggplot(df_long, aes(xvalue, yvalue)) +
+<pre class="r"><code>ggplot(df_long, 
+       aes(xvalue, 
+           yvalue)) +
   geom_bar() 
 #Eller som &#39;Condition&#39; og &#39;Time&#39;, siden vi allerede har defineret variablerne i vores gather():
-ggplot(df_long, aes, x = Condition, y = Time) +
+ggplot(df_long, 
+       aes, 
+       x = Condition, 
+       y = Time) +
   geom_bar()
 #Hvis dette ikke virker, skal man nogle gange bruge geom_bar(stat = &quot;identity&quot;):
-ggplot(df_long, aes(xvalue, yvalue)) +
+ggplot(df_long, 
+       aes(xvalue, 
+           yvalue)) +
   geom_bar(stat = &quot;identity&quot;) </code></pre>
 </div>
 <div id="hvis-vi-vil-lave-en-sammenligning-kan-dette-gre-pa-flere-forskellige-mader" class="section level3">
 <h3>Hvis vi vil lave en sammenligning kan dette gøre på flere forskellige måder</h3>
 <p>Vi kan bruge patchwork</p>
-<pre class="r"><code>p1 &lt;- ggplot(df_long1, aes(xvalue, yvalue)) +
+<pre class="r"><code>p1 &lt;- ggplot(df_long1, 
+             aes(xvalue, 
+                 yvalue)) +
   geom_bar() 
-p2 &lt;- ggplot(df_long2, aes(xvalue, yvalue)) +
+p2 &lt;- ggplot(df_long2, 
+             aes(xvalue, 
+                 yvalue)) +
   geom_bar() 
 p1 + p2</code></pre>
 <p>Vi kan fjerne den ene color for at sammenligne de to boxplots</p>
 <pre class="r"><code>  + theme(legend.position = &quot;none&quot;)</code></pre>
 <p>Det er typisk også en god ide at sætte en begrænsning for y-aksen, for at fastholde sammenligningen</p>
 <pre class="r"><code>  + ylim(2, 16)</code></pre>
+<p>Og for at gøre den pænere</p>
+<pre class="r"><code>  + theme_classic() </code></pre>
 <p>Derudover kan man rotere x-akse-mærkaterne 90 grader, hvis mærkaterne er for lange</p>
-<pre class="r"><code>p1 + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + p2 + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<pre class="r"><code>p1 + 
+  theme(axis.text.x = element_text(angle = 90, 
+                                   hjust = 1)) + 
+  p2 + 
+  theme(axis.text.x = element_text(angle = 90, 
+                                   hjust = 1))</code></pre>
 <hr />
 </div>
 </div>
@@ -535,8 +568,19 @@ p1 + p2</code></pre>
 <h1>Variabler i forhold til hinanden</h1>
 <div id="start-med-at-kr-plottet" class="section level3">
 <h3>Start med at kør plottet</h3>
-<pre class="r"><code>ggplot(df, aes(df$xxx1, df$xxx2)) +
+<pre class="r"><code>ggplot(df, 
+       aes(df$xxx1, 
+           df$xxx2)) +
   geom_point()</code></pre>
+</div>
+<div id="man-kan-ogsa-sammenholde-to-variabler-med-en-tredje" class="section level3">
+<h3>Man kan også sammenholde to variabler med en tredje</h3>
+<p>Jeg er dog ret sikker på at den tredje variable skal være en faktor - derfor definerer vi den inde i plottet som ‘factor’</p>
+<pre class="r"><code>ggplot(df, 
+       aes(df$xxx1, 
+           df$xxx2, 
+           fill = factor(xxx))) +
+  geom_bar()</code></pre>
 </div>
 <div id="navngiv-akser-og-plot" class="section level3">
 <h3>Navngiv akser og plot</h3>
@@ -629,7 +673,9 @@ points(x1, y1,
        pch = 16, 
        col = &quot;green&quot;)
 myline_rd &lt;- lm(y1 ~ x1)
-abline(myline_rd, col = &quot;green&quot;, lty = 2)
+abline(myline_rd, 
+       col = &quot;green&quot;, 
+       lty = 2)
 legend(&quot;topleft&quot;, 
        legend = c(&quot;Naming w. int.&quot;, &quot;Reading w. int.&quot;), 
        col = c(&quot;red&quot;, &quot;green&quot;), 
