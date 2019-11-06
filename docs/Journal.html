@@ -379,10 +379,8 @@ div.tocify {
 </div>
 
 
-<div id="koder" class="section level1">
-<h1>Koder</h1>
-<div id="startkoder" class="section level2">
-<h2>Startkoder</h2>
+<div id="startkoder" class="section level1">
+<h1>Startkoder</h1>
 <div id="ryd-gobal-enviroment" class="section level3">
 <h3>Ryd Gobal Enviroment</h3>
 <pre class="r"><code>rm(list = ls())</code></pre>
@@ -397,8 +395,8 @@ div.tocify {
 <hr />
 </div>
 </div>
-<div id="eller-opret-din-egen-dataframe" class="section level2">
-<h2>Eller opret din egen dataframe</h2>
+<div id="eller-opret-din-egen-dataframe" class="section level1">
+<h1>Eller opret din egen dataframe</h1>
 <div id="start-med-at-skriv-data-ind" class="section level3">
 <h3>Start med at skriv data ind</h3>
 <pre class="r"><code>employee &lt;- c(&#39;John Doe&#39;,&#39;Peter Gynn&#39;,&#39;Jolie Hope&#39;)
@@ -413,8 +411,8 @@ startdate &lt;- as.Date(c(&#39;2010-11-1&#39;,&#39;2008-3-25&#39;,&#39;2007-3-14
 <hr />
 </div>
 </div>
-<div id="forbered-data" class="section level2">
-<h2>Forbered data</h2>
+<div id="forbered-data" class="section level1">
+<h1>Forbered data</h1>
 <div id="load-dine-pakker" class="section level3">
 <h3>Load dine pakker</h3>
 <pre class="r"><code>#Basispakken:
@@ -460,8 +458,8 @@ old &lt;- subset(train, train$Age &gt; 60)</code></pre>
 <hr />
 </div>
 </div>
-<div id="almindelig-plot" class="section level2">
-<h2>Almindelig plot</h2>
+<div id="almindelig-plot" class="section level1">
+<h1>Almindelig plot</h1>
 <div id="det-almindelige-plot" class="section level3">
 <h3>Det almindelige plot</h3>
 <pre class="r"><code>plot(xvalue, yvalue, 
@@ -489,8 +487,8 @@ abline(myline,
 <hr />
 </div>
 </div>
-<div id="boxplot" class="section level2">
-<h2>Boxplot</h2>
+<div id="boxplot" class="section level1">
+<h1>Boxplot</h1>
 <div id="vi-kan-starte-med-at-lave-en-_long-datast-for-at-kunne-lave-boxplot" class="section level3">
 <h3>Vi kan starte med at lave en _long datasæt for at kunne lave boxplot</h3>
 <pre class="r"><code>df_long &lt;- df_long &lt;- gather(df, key = &quot;Condition&quot;, value = &quot;Time&quot;)
@@ -533,8 +531,8 @@ p1 + p2</code></pre>
 <hr />
 </div>
 </div>
-<div id="variabler-i-forhold-til-hinanden" class="section level2">
-<h2>Variabler i forhold til hinanden</h2>
+<div id="variabler-i-forhold-til-hinanden" class="section level1">
+<h1>Variabler i forhold til hinanden</h1>
 <div id="start-med-at-kr-plottet" class="section level3">
 <h3>Start med at kør plottet</h3>
 <pre class="r"><code>ggplot(df, aes(df$xxx1, df$xxx2)) +
@@ -562,8 +560,8 @@ p1 + p2</code></pre>
 <hr />
 </div>
 </div>
-<div id="ekstra-ting" class="section level2">
-<h2>Ekstra ting</h2>
+<div id="ekstra-ting" class="section level1">
+<h1>Ekstra ting</h1>
 <div id="fjern-na" class="section level3">
 <h3>Fjern NA</h3>
 <pre class="r"><code>x[!is.na(x)]</code></pre>
@@ -639,7 +637,6 @@ legend(&quot;topleft&quot;,
        cex = 0.8)</code></pre>
 </div>
 </div>
-</div>
 
 
 
@@ -678,7 +675,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
