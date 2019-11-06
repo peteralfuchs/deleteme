@@ -1,0 +1,320 @@
+---
+title: "Koder"
+author: "Peter Fuchs"
+date: "11/6/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Koder
+## Startkoder
+### Ryd Gobal Enviroment
+```{r eval=FALSE}
+rm(list = ls())
+```
+
+### Hent filen og serparer med semikolon 
+```{r eval=FALSE}
+df <- read.csv("xxx", sep = ";")
+```
+
+### Fjern irrelevante kolonner
+```{r eval=FALSE}
+df$xxx <- NULL
+```
+
+***
+## Eller opret din egen dataframe
+
+### Start med at skriv data ind
+```{r eval=FALSE}
+employee <- c('John Doe','Peter Gynn','Jolie Hope')
+salary <- c(21000, 23400, 26800)
+startdate <- as.Date(c('2010-11-1','2008-3-25','2007-3-14'))
+```
+
+### Så lav dataframe med disse kolonner
+```{r eval=FALSE}
+employ.data <- data.frame(employee, salary, startdate)
+```
+
+Check data ved at kigge i Global Environment eller ved brug at str()
+```{r eval=FALSE}
+str(employ.data)
+```
+
+***
+## Forbered data
+
+### Load dine pakker
+```{r eval=FALSE}
+#Basispakken:
+library(tidyverse)
+#Denne pakke gør det muligt, at plotte flere plots i samme billede:
+library(patchwork)
+```
+
+### Check hvilken kategori dit data har ve at klikke på 'fold ud' i Gobal Environment. Det er vigtigt at kategorierne passer allerede her i processen - hvis de ikke passer, kan en af følgende koder bruges
+```{r eval=FALSE}
+df$xxx <- as.numeric(df$xxx)
+df$xxx <- as.factor(df$xxx)
+```
+
+Du kan også checke kategorierne ved brug at str()
+```{r eval=FALSE}
+str(df)
+```
+
+### Omdøb kolonner
+```{r eval=FALSE}
+colnames(df)[1] <- "xxxx"
+colnames(df)[2] <- "xxxx"
+colnames(df)[3] <- "xxxx"
+colnames(df)[4] <- "xxxx"
+```
+
+### Sorter kolonner med subset()
+```{r eval=FALSE}
+xxxx <- subset(df, df$xxx == 1)
+```
+
+Et eksempel på en kompliceret sortering
+```{r eval=FALSE}
+child <- subset(train, train$Age < 10)
+young <- subset(train, train$Age >= 10 & train$Age < 20)
+adult <- subset(train, train$Age >= 20 & train$Age < 40)
+elder <- subset(train, train$Age >= 40 & train$Age < 60)
+old <- subset(train, train$Age > 60)
+```
+
+
+### Lav en ny kolonne med "ifelse"
+Lav en ny kolonne, der siger at: "hvis variablen i df$ny siger "Ja", så skriv 1, ellers skriv 0"
+```{r eval=FALSE}
+df$ny <- ifelse(df$xxx, "Ja", 1, 0)
+```
+
+Den kan også se sådan ud:
+```{r eval=FALSE}
+df$ny <- ifelse(df$xxx < 18, "Adult", "Child")
+```
+
+Eller med flere variabler:
+```{r eval=FALSE}
+df_long$Task <- ifelse(
+  df_long$Condition == 'Rea.No.Int.' 
+  | df_long$Condition == 'Rea.Int.', 
+  "Reading", "Naming")
+```
+
+***
+## Almindelig plot
+### Det almindelige plot
+```{r eval=FALSE}
+plot(xvalue, yvalue, 
+     xlab = "xValue", 
+     ylab = "yValue", 
+     main = "Eksempel", 
+     ylim = c(4, 12), 
+     pch = 15, 
+     col = "red")
+```
+
+Til alm. plot kan vi tilføje en reggresionslinje
+```{r eval=FALSE}
+myline <- lm(yvalue ~ xvalue)
+abline(myline, 
+       col = "red", 
+       lty = 2)
+```
+
+Også points (fill)
+```{r eval=FALSE}
+points(x1, y1, 
+       pch = 16, 
+       col = "green")
+```
+
+Man kan også manuelt tilføje en legend
+```{r eval=FALSE}
+legend("topleft", 
+       legend = c("Naming w. int.", "Reading w. int."), 
+       col = c("red", "green"), 
+       lty = 2:2, 
+       cex = 0.8)
+```
+
+***
+## Boxplot
+### Vi kan starte med at lave en _long datasæt for at kunne lave boxplot 
+```{r eval=FALSE}
+df_long <- df_long <- gather(df, key = "Condition", value = "Time")
+#For at checke om den er lavet korrekt, kan vi checke om tallene er samlet i 1 kolonne ved komandoen
+head(df_long)
+```
+
+### Vi plotter et boxplot + jitter + flipped
+```{r eval=FALSE}
+ggplot(df_long, aes(x = Condition, y = Time, color = Condition)) +
+  geom_boxplot() +
+  geom_jitter() +
+  coord_flip() +
+  theme_classic()
+```
+
+### Vi kan plotte variablerne fra datasættet som bar
+```{r eval=FALSE}
+ggplot(df_long, aes(xvalue, yvalue)) +
+  geom_bar() 
+#Eller som 'Condition' og 'Time', siden vi allerede har defineret variablerne i vores gather():
+ggplot(df_long, aes, x = Condition, y = Time) +
+  geom_bar()
+#Hvis dette ikke virker, skal man nogle gange bruge geom_bar(stat = "identity"):
+ggplot(df_long, aes(xvalue, yvalue)) +
+  geom_bar(stat = "identity") 
+```
+
+### Hvis vi vil lave en sammenligning kan dette gøre på flere forskellige måder
+Vi kan bruge patchwork
+```{r eval=FALSE}
+p1 <- ggplot(df_long1, aes(xvalue, yvalue)) +
+  geom_bar() 
+p2 <- ggplot(df_long2, aes(xvalue, yvalue)) +
+  geom_bar() 
+p1 + p2
+```
+
+Vi kan fjerne den ene color for at sammenligne de to boxplots
+```{r eval=FALSE}
+  + theme(legend.position = "none")
+```
+
+Det er typisk også en god ide at sætte en begrænsning for y-aksen, for at fastholde sammenligningen
+```{r eval=FALSE}
+  + ylim(2, 16)
+```
+
+Derudover kan man rotere x-akse-mærkaterne 90 grader, hvis mærkaterne er for lange
+```{r eval=FALSE}
+p1 + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + p2 + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+***
+## Variabler i forhold til hinanden
+### Start med at kør plottet
+```{r eval=FALSE}
+ggplot(df, aes(df$xxx1, df$xxx2)) +
+  geom_point()
+```
+
+### Navngiv akser og plot
+```{r eval=FALSE}
++ ylab("Timers søvn") +
+  xlab("Tid") +
+  labs(title = "Naming with interference vs timer søvn")
+```
+
+### Indsæt reggresionen
+```{r eval=FALSE}
++ geom_smooth(method = "lm", 
+              se = FALSE, 
+              col = "red")
+```
+
+
+### Analyser reggresion med summary og notér en værdi som label
+```{r eval=FALSE}
+p + annotate("text", 
+             x = 12, 
+             y = 8.5, 
+             label = "p-value 0.1093", 
+             color = "red")
+```
+
+***
+## Ekstra ting
+### Fjern NA
+```{r eval=FALSE}
+x[!is.na(x)]
+```
+
+### Find p-værdi osv.
+```{r eval=FALSE}
+myline_rd <- lm(faktor1 ~ faktor2)
+summary(myline_rd)
+```
+
+### Brug table til at finde en oversigt
+```{r eval=FALSE}
+table(df$xxx1)
+```
+
+
+### Find gennemsnittet
+```{r eval=FALSE}
+p <- mean(df$xxx)
+```
+
+Et eksempel på et mere kompliceret plot hvor man sammenligner gennemsnittet for forskellige år
+```{r eval=FALSE}
+#Sammenlign naming_int med hinanden
+av2015 <- mean(df_2015$Naming_Int)
+av2016 <- mean(df_2016$Naming_Int)
+av2017 <- mean(df_2017$Naming_Int)
+av2018 <- mean(df_2018$Naming_Int)
+av2019 <- mean(df_vores$Naming..int.)
+#Sammenlign reading_int med hinanden
+av_rd_2015 <- mean(df_2015$Reading_Int)
+av_rd_2016 <- mean(df_2016$Reading_Int)
+av_rd_2017 <- mean(df_2017$Reading_Int)
+av_rd_2018 <- mean(df_2018$Reading_Int)
+av_rd_2019 <- mean(df_vores$Reading..int.)
+#Definer dem som variabler 
+av_na_long <- c(av2015, 
+                av2016, 
+                av2017, 
+                av2018, 
+                av2019)
+years <- c(2015, 
+           2016, 
+           2017, 
+           2018, 
+           2019)
+y1 <- c(av_rd_2015, 
+        av_rd_2016, 
+        av_rd_2017, 
+        av_rd_2018, 
+        av_rd_2019)
+x1 <- c(2015, 
+        2016, 
+        2017, 
+        2018, 
+        2019)
+#Plot det
+plot(years, 
+     av_na_long, 
+     xlab = "Years", 
+     ylab = "Seconds", 
+     main = "Average time over the years", 
+     ylim = c(4, 12), 
+     pch = 15, 
+     col = "red")
+myline <- lm(av_na_long ~ years)
+abline(myline, 
+       col = "red", 
+       lty = 2)
+points(x1, y1, 
+       pch = 16, 
+       col = "green")
+myline_rd <- lm(y1 ~ x1)
+abline(myline_rd, col = "green", lty = 2)
+legend("topleft", 
+       legend = c("Naming w. int.", "Reading w. int."), 
+       col = c("red", "green"), 
+       lty = 2:2, 
+       cex = 0.8)
+```
+
