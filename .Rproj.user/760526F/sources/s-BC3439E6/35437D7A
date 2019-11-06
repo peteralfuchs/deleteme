@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1573044382968.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "35437D7A",
+    "lastKnownWriteTime" : 1573046003,
+    "last_content_update" : 1573046003530,
+    "path" : "~/Uden for Clouden/GitHub files/deleteme/Journal.Rmd",
+    "project_path" : "Journal.Rmd",
+    "properties" : {
+        "cursorPosition" : "34,33",
+        "scrollLine" : "24"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
