@@ -1,0 +1,11 @@
+name: "Peter Fuchs"
+navbar:
+  title: "Peter Fuchs"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Koder"
+      href: Journal.html
+    - text: "Links"
+      href: Links.html
+output_dir: "docs"
