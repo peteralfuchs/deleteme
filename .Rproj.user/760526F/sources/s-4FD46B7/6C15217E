@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1573054261945.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "11|12|27|3|\n28|32|47|3|\n48|15|111|3|\n112|17|148|3|\n149|9|206|3|\n207|34|238|3|\n239|13|322|0|\n",
+    "hash" : "0",
+    "id" : "6C15217E",
+    "lastKnownWriteTime" : 1573054588,
+    "last_content_update" : 1573054627776,
+    "path" : "~/Desktop/Koder.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "11,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

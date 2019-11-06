@@ -12,7 +12,7 @@
 
 
 
-<title>Animals</title>
+<title>Journal.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -374,13 +374,12 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Animals</h1>
 
 </div>
 
 
-<div id="startkoder" class="section level1">
-<h1>Startkoder</h1>
+<div id="hent-fil" class="section level1">
+<h1>Hent fil</h1>
 <div id="ryd-gobal-enviroment" class="section level3">
 <h3>Ryd Gobal Enviroment</h3>
 <pre class="r"><code>rm(list = ls())</code></pre>
@@ -395,8 +394,8 @@ div.tocify {
 <hr />
 </div>
 </div>
-<div id="eller-opret-din-egen-dataframe" class="section level1">
-<h1>Eller opret din egen dataframe</h1>
+<div id="opret-din-egen-dataframe" class="section level1">
+<h1>Opret din egen dataframe</h1>
 <div id="start-med-at-skriv-data-ind" class="section level3">
 <h3>Start med at skriv data ind</h3>
 <pre class="r"><code>employee &lt;- c(&#39;John Doe&#39;,&#39;Peter Gynn&#39;,&#39;Jolie Hope&#39;)
@@ -527,12 +526,15 @@ p1 + p2</code></pre>
 <p>Det er typisk også en god ide at sætte en begrænsning for y-aksen, for at fastholde sammenligningen</p>
 <pre class="r"><code>  + ylim(2, 16)</code></pre>
 <p>Derudover kan man rotere x-akse-mærkaterne 90 grader, hvis mærkaterne er for lange</p>
-<pre class="r"><code>p1 + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + p2 + theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<pre class="r"><code>p1 + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  p2 + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
 <hr />
 </div>
 </div>
-<div id="variabler-i-forhold-til-hinanden" class="section level1">
-<h1>Variabler i forhold til hinanden</h1>
+<div id="ggplot" class="section level1">
+<h1>ggplot</h1>
 <div id="start-med-at-kr-plottet" class="section level3">
 <h3>Start med at kør plottet</h3>
 <pre class="r"><code>ggplot(df, aes(df$xxx1, df$xxx2)) +
@@ -635,7 +637,6 @@ legend(&quot;topleft&quot;,
        col = c(&quot;red&quot;, &quot;green&quot;), 
        lty = 2:2, 
        cex = 0.8)</code></pre>
-<hr />
 </div>
 </div>
 

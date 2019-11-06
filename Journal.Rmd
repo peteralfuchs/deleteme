@@ -1,5 +1,5 @@
 ---
-title: "wtf"
+title: ""
 output:
   html_document:
     toc: true
@@ -14,8 +14,7 @@ output:
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
-
-# Startkoder
+# Hent fil
 ### Ryd Gobal Enviroment
 ```{r eval=FALSE}
 rm(list = ls())
@@ -32,7 +31,8 @@ df$xxx <- NULL
 ```
 
 ***
-# Eller opret din egen dataframe
+# Opret din egen dataframe
+
 ### Start med at skriv data ind
 ```{r eval=FALSE}
 employee <- c('John Doe','Peter Gynn','Jolie Hope')
@@ -52,6 +52,7 @@ str(employ.data)
 
 ***
 # Forbered data
+
 ### Load dine pakker
 ```{r eval=FALSE}
 #Basispakken:
@@ -202,11 +203,14 @@ Det er typisk også en god ide at sætte en begrænsning for y-aksen, for at fas
 
 Derudover kan man rotere x-akse-mærkaterne 90 grader, hvis mærkaterne er for lange
 ```{r eval=FALSE}
-p1 + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + p2 + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+p1 + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  p2 + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 ***
-# Variabler i forhold til hinanden
+# ggplot
 ### Start med at kør plottet
 ```{r eval=FALSE}
 ggplot(df, aes(df$xxx1, df$xxx2)) +
@@ -321,4 +325,3 @@ legend("topleft",
        cex = 0.8)
 ```
 
-***

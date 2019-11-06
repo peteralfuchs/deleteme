@@ -17,16 +17,16 @@ output: html_document
 <div class="row" style="padding-top: 30px;">
 <div class="col-sm-6">
 
-# **Koder jeg glemmer**
+# **Koder som jeg glemmer**
 
 ## Hilsen
 
-Hej fremtids-Peter. Her er den hjemmeside, jeg har lavet til dig - håber du er stolt. Kh gamle Peter.
-
+Hej fremtids-Peter. Her er den hjemmeside, som jeg har lavet til dig - håber du er stolt af os. Kh gamle Peter.
 
 </div>
 <div class="col-sm-6">
 
+<a href = "https://crumplab.github.io">
 ![](https://meme.xyz/uploads/posts/t/l-36692-going-to-see-if-my-code-works-800-lines-of-codes-900-errors.jpg)
 </a>
 </div>
